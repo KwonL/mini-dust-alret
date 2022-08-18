@@ -1,23 +1,32 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getSidoDatas } from '../feature/dustSlice'
 
-function Card({ datas }) {
+function Card({ guGun }) {
+  const dispatch = useDispatch()
+  const datas = useSelector(getSidoDatas)
+  console.log('datas', datas)
+  const data = datas[guGun]
+  datas && console.log('성공', data)
+
+  const addToMyFavorite = () => {}
+
   return (
     <div>
-      {datas &&
-        datas.map((item) => (
-          <div key={item.stationName}>
-            <div>
-              <h3>{item.stationName}</h3>
-              <span>{item.sidoName}</span>
-              <span>☆</span>
-            </div>
-            <div>
-              <p>{item.pm10Grade}</p>
-              <p>{item.khaiValue}</p>
-              <p>기준: {item.dataTime}</p>
-            </div>
+      {data && (
+        <div>
+          <div>
+            <h3>{data.stationName}</h3>
+            <span>{data.sidoName}</span>
+            <span onClick={addToMyFavorite}>☆</span>
           </div>
-        ))}
+          <div>
+            <p>{data.pm10Grade}</p>
+            <p>{data.khaiValue}</p>
+            <p>기준: {data.dataTime}</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
