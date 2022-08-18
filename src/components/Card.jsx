@@ -1,15 +1,17 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSidoDatas } from '../feature/dustSlice'
+import { addToMyFavoriteList } from '../feature/dustSlice'
 
 function Card({ guGun }) {
   const dispatch = useDispatch()
   const datas = useSelector(getSidoDatas)
-  console.log('datas', datas)
   const data = datas[guGun]
-  datas && console.log('성공', data)
 
-  const addToMyFavorite = () => {}
+  const addToMyFavorite = () => {
+    console.log('클릭')
+    dispatch(addToMyFavoriteList(data.stationName))
+  }
 
   return (
     <div>
@@ -18,7 +20,9 @@ function Card({ guGun }) {
           <div>
             <h3>{data.stationName}</h3>
             <span>{data.sidoName}</span>
-            <span onClick={addToMyFavorite}>☆</span>
+            <span onClick={addToMyFavorite}>
+              {data.myFavorite ? '☆' : '안돼'}
+            </span>
           </div>
           <div>
             <p>{data.pm10Grade}</p>

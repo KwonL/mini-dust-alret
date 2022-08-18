@@ -17,6 +17,7 @@ const initialState = {
   setCardData: null,
   status: 'idle',
   error: null,
+  myFavorite: [],
 }
 
 export const fetchDatas = createAsyncThunk(
@@ -50,11 +51,13 @@ export const dustSlice = createSlice({
   initialState,
   reducers: {
     filterGuGunDatas(state, action) {
-      state.setCardData = state.setSidoDatas[action.payload]
+      // state.setCardData = state.setSidoDatas[action.payload]
+      state.setCardData = action.payload
     },
-    // ChangeisMyFavorite(state, action){
-    //   state.setSidoDatas
-    // }
+    addToMyFavoriteList(state, action) {
+      state.setSidoDatas[action.payload].myFavorite =
+        !state.setSidoDatas[action.payload].myFavorite
+    },
   },
   extraReducers(builder) {
     builder
@@ -66,7 +69,6 @@ export const dustSlice = createSlice({
         state.status = 'succeeded'
         state.setSidoDatas = result
         state.setGuGunList = Object.keys(result)
-        state.setCardData = result[state.setGuGunList[0]]
       })
       .addCase(fetchDatas.rejected, (state, action) => {
         state.status = 'failed'
@@ -81,6 +83,6 @@ export const selectCardData = (state) => state.dust.setCardData
 export const getDustDataStatus = (state) => state.dust.status
 export const getDustDataError = (state) => state.dust.error
 
-export const { filterGuGunDatas } = dustSlice.actions
+export const { filterGuGunDatas, addToMyFavoriteList } = dustSlice.actions
 
 export default dustSlice.reducer

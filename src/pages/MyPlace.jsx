@@ -1,12 +1,13 @@
 import React from 'react'
-import SelectBox from '../components/SelectBox'
+import Card from '../components/Card'
+
+import { useSelector } from 'react-redux/es/exports'
+import { selectCardData } from '../feature/dustSlice'
 
 function MyPlace() {
-  return (
-    <div>
-      <SelectBox />
-    </div>
-  )
+  const data = useSelector(selectCardData)
+
+  return <div> {data && <Card guGun={data} />}</div>
 }
 
 export default MyPlace
