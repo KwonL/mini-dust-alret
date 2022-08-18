@@ -14,7 +14,7 @@ const getParameters = {
 const initialState = {
   setSidoDatas: null,
   setGuGunList: null,
-  setGuGunDatas: null,
+  setCardData: null,
   status: 'idle',
   error: null,
 }
@@ -35,9 +35,10 @@ export const fetchDatas = createAsyncThunk(
       const result = response.reduce((acc, cur) => {
         return {
           ...acc,
-          [cur.stationName]: [cur],
+          [cur.stationName]: cur,
         }
       }, {})
+      console.log('실행', result)
       return result
     } catch (error) {
       return error.message
@@ -48,7 +49,12 @@ export const dustSlice = createSlice({
   name: 'dust',
   initialState,
   reducers: {
-    setSidoDats: {},
+    filterGuGunDatas(state, action) {
+      state.setCardData = state.setSidoDatas[action.payload]
+    },
+    // ChangeisMyFavorite(state, action){
+    //   state.setSidoDatas
+    // }
   },
   extraReducers(builder) {
     builder
@@ -60,6 +66,7 @@ export const dustSlice = createSlice({
         state.status = 'succeeded'
         state.setSidoDatas = result
         state.setGuGunList = Object.keys(result)
+        state.setCardData = result[state.setGuGunList[0]]
       })
       .addCase(fetchDatas.rejected, (state, action) => {
         state.status = 'failed'
@@ -70,8 +77,10 @@ export const dustSlice = createSlice({
 
 export const getSidoDatas = (state) => state.dust.setSidoDatas
 export const getGuGunList = (state) => state.dust.setGuGunList
-export const getGuGunDatas = (state) => state.dust.setGuGunDatas
+export const selectCardData = (state) => state.dust.setCardData
 export const getDustDataStatus = (state) => state.dust.status
 export const getDustDataError = (state) => state.dust.error
+
+export const { filterGuGunDatas } = dustSlice.actions
 
 export default dustSlice.reducer
