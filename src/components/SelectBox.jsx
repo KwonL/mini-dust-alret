@@ -12,16 +12,16 @@ import { useLocation } from 'react-router'
 
 function SelectBox() {
   const [sido, setSido] = useState(OPTIONS[0])
-  const [guGun, setGuGun] = useState(null)
   const dispatch = useDispatch()
   const isStatus = useSelector(getDustDataStatus)
   const isError = useSelector(getDustDataError)
   const guGunList = useSelector(getGuGunList)
+
   const location = useLocation().pathname
 
   const changeSidoHandler = async (e) => {
     setSido(e.target.value)
-    dispatch(fetchDatas(sido))
+    dispatch(fetchDatas(e.target.value))
   }
 
   const changeGuGunHandler = (e) => {
@@ -32,7 +32,7 @@ function SelectBox() {
     if (isStatus === 'idle') {
       dispatch(fetchDatas(sido))
     }
-  }, [isStatus, dispatch])
+  }, [isStatus, dispatch, sido])
 
   return (
     <>
@@ -45,6 +45,7 @@ function SelectBox() {
           ))}
         </select>
       )}
+
       {location == '/' && (
         <select onChange={changeGuGunHandler}>
           {guGunList &&

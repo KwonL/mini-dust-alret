@@ -20,9 +20,7 @@ function Card({ guGun }) {
           <div>
             <h3>{data.stationName}</h3>
             <span>{data.sidoName}</span>
-            <span onClick={addToMyFavorite}>
-              {data.myFavorite ? '☆' : '안돼'}
-            </span>
+            <span onClick={addToMyFavorite}>{data.myFavorite ? '★' : '☆'}</span>
           </div>
           <div>
             <p>{data.pm10Grade}</p>
