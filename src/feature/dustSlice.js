@@ -56,6 +56,7 @@ export const dustSlice = createSlice({
     addToMyFavoriteList(state, action) {
       state.setSidoDatas[action.payload].myFavorite =
         !state.setSidoDatas[action.payload].myFavorite
+      state.myFavorite.push(action.payload)
     },
   },
   extraReducers(builder) {
@@ -80,6 +81,7 @@ export const dustSlice = createSlice({
 export const getSidoDatas = (state) => state.dust.setSidoDatas
 export const getGuGunList = (state) => state.dust.setGuGunList
 export const selectCardData = (state) => state.dust.setCardData
+export const favoriteArr = (state) => state.dust.myFavorite
 export const getDustDataStatus = (state) => state.dust.status
 export const getDustDataError = (state) => state.dust.error
 
