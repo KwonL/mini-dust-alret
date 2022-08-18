@@ -14,6 +14,7 @@ const getParameters = {
 const initialState = {
   setSidoDatas: null,
   setGuGunList: null,
+  setGuGunDatas: null,
   status: 'idle',
   error: null,
 }
@@ -43,7 +44,6 @@ export const fetchDatas = createAsyncThunk(
     }
   },
 )
-
 export const dustSlice = createSlice({
   name: 'dust',
   initialState,
@@ -60,7 +60,6 @@ export const dustSlice = createSlice({
         state.status = 'succeeded'
         state.setSidoDatas = result
         state.setGuGunList = Object.keys(result)
-        console.log(state)
       })
       .addCase(fetchDatas.rejected, (state, action) => {
         state.status = 'failed'
@@ -68,5 +67,11 @@ export const dustSlice = createSlice({
       })
   },
 })
+
+export const getSidoDatas = (state) => state.dust.setSidoDatas
+export const getGuGunList = (state) => state.dust.setGuGunList
+export const getGuGunDatas = (state) => state.dust.setGuGunDatas
+export const getDustDataStatus = (state) => state.dust.status
+export const getDustDataError = (state) => state.dust.error
 
 export default dustSlice.reducer
