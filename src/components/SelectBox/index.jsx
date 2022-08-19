@@ -38,24 +38,24 @@ function SelectBox() {
   return (
     <S.Container>
       {location !== '/favorite' && (
-        <select onChange={changeSidoHandler}>
+        <S.SelectBox onChange={changeSidoHandler}>
           {OPTIONS.map((sido, index) => (
             <option key={index} value={sido}>
               {sido}
             </option>
           ))}
-        </select>
+        </S.SelectBox>
       )}
 
       {location == '/' && (
-        <select onChange={changeGuGunHandler}>
+        <S.SelectBox onChange={changeGuGunHandler} width="217">
           {guGunList &&
             guGunList.map((gugun, index) => (
               <option key={index} value={gugun}>
                 {gugun}
               </option>
             ))}
-        </select>
+        </S.SelectBox>
       )}
     </S.Container>
   )

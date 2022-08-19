@@ -7,15 +7,9 @@ import { favoriteArr } from '../feature/dustSlice'
 function Favorites() {
   const datas = useSelector(favoriteArr)
 
-  useEffect(() => {
-    console.log('갱신되나?', datas)
-    console.log(datas.lenght)
-  }, [datas])
-
   return (
     <>
-      {datas.lenght !== 0 &&
-        datas.map((item, index) => <Card key={index} guGun={item} />)}
+      {datas && datas.map((item, index) => <Card key={index} guGun={item} />)}
     </>
   )
 }
