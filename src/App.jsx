@@ -4,10 +4,11 @@ import Tab from './components/Tab'
 import Favorite from './pages/Favorites'
 import MyPlace from './pages/MyPlace'
 import ViewAllPlace from './pages/ViewAllPlace'
+import Container from 'react-bootstrap/Container'
 
 function App() {
   return (
-    <>
+    <Container>
       <SelectBox />
       <Routes>
         <Route path="/" element={<MyPlace />} />
@@ -16,7 +17,7 @@ function App() {
         <Route path="/*" element={<p>Not Found</p>} />
       </Routes>
       <Tab />
-    </>
+    </Container>
   )
 }
 
