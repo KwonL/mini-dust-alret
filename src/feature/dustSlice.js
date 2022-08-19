@@ -15,7 +15,7 @@ const initialState = {
   setSidoDatas: null,
   setGuGunList: null,
   setCardData: null,
-  myFavorite: [],
+  localStorageArr: localStorage.getItem('myFavorite'),
   status: 'idle',
   error: null,
 }
@@ -27,12 +27,13 @@ export const fetchDatas = createAsyncThunk(
       const { data } = await axios.get(BASE_URL, {
         params: { ...getParameters, sidoName },
       })
-      const response = data['response']['body']['items'].map((item) => {
-        return (item = {
-          ...item,
-          myFavorite: false,
-        })
-      })
+      const response = data['response']['body']['items']
+      // .map((item) => {
+      //   return (item = {
+      //     ...item,
+      //     myFavorite: false,
+      //   })
+      // })
       const result = response.reduce((acc, cur) => {
         return {
           ...acc,
@@ -52,10 +53,13 @@ export const dustSlice = createSlice({
     filterGuGunDatas(state, action) {
       state.setCardData = action.payload
     },
-    addToMyFavoriteList(state, action) {
-      state.setSidoDatas[action.payload].myFavorite =
-        !state.setSidoDatas[action.payload].myFavorite
-      state.myFavorite.push(action.payload)
+    ChangeMyFavoriteList(state, action) {
+      if (state.localStorageArr.includes(action.payload)) {
+      }
+      // let getFavoriteArr = localStorage.getItem('myFavorite')
+      // state.setSidoDatas[action.payload].myFavorite =
+      //   !state.setSidoDatas[action.payload].myFavorite
+      // state.myFavorite.push(action.payload)
     },
   },
   extraReducers(builder) {
@@ -80,11 +84,12 @@ export const dustSlice = createSlice({
 export const getSidoDatas = (state) => state.dust.setSidoDatas
 export const getGuGunList = (state) => state.dust.setGuGunList
 export const selectCardData = (state) => state.dust.setCardData
-export const favoriteArr = (state) => state.dust.myFavorite
+// export const favoriteArr = (state) => state.dust.myFavorite
 export const getDustDataStatus = (state) => state.dust.status
 export const getDustDataError = (state) => state.dust.error
 
-export const { filterGuGunDatas, addToMyFavoriteList, filterGuGunList } =
-  dustSlice.actions
+// export const { filterGuGunDatas, addToMyFavoriteList, filterGuGunList } =
+//   dustSlice.actions
+export const { filterGuGunDatas, filterGuGunList } = dustSlice.actions
 
 export default dustSlice.reducer
