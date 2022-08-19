@@ -6,15 +6,14 @@ export const Card = styled.div`
   padding: 1rem 1.5rem;
   border-radius: 0.5rem;
   margin-top: 1.2rem;
-  background-color: #03c75a;
+  background-color: ${(props) => props.color || '#eee'};
   color: #fff;
-  // min-height: 13rem;
 `
 
 export const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 `
 
 export const CardTitle = styled.div`
@@ -43,7 +42,7 @@ export const CardBody = styled.div`
 export const StrGradArea = styled.div`
   background-color: #fff;
   border-radius: 0.5rem;
-  color: #03c75a;
+  color: ${(props) => props.color || '#eee'};
   font-weight: bold;
   display: inline-block;
   padding: 0.5rem 1rem;

@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.8rem 1rem;
+  margin-top: 2rem;
 `
 export const SelectBox = styled.select`
   padding: 0.375rem 2.25rem 0.375rem 0.75rem;

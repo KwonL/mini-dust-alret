@@ -25,6 +25,8 @@ export const TabItem = styled.div`
   justify-content: center;
   gap: 0.3rem;
   font-size: 1.2rem;
+  border-bottom: 2px solid transparent;
+  border-color: ${({ active }) => (active ? '#03c75a' : 'transparent')};
 `
 export const Text = styled.span`
   font-size: 0.7rem;

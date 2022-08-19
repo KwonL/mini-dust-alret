@@ -20,7 +20,7 @@ function Card({ guGun }) {
   return (
     <>
       {data && (
-        <S.Card>
+        <S.Card color={grade[1]}>
           <S.CardHeader>
             <S.CardTitle>
               {data.stationName}
@@ -36,7 +36,7 @@ function Card({ guGun }) {
             </S.Star>
           </S.CardHeader>
           <S.CardBody>
-            <S.StrGradArea>{grade}</S.StrGradArea>
+            <S.StrGradArea color={grade[1]}>{grade[0]}</S.StrGradArea>
             <S.Text>미세먼지수치 : {data.khaiValue}</S.Text>
             <S.Text>({data.dataTime} 기준)</S.Text>
           </S.CardBody>
