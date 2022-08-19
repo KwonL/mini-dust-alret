@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import Card from '../components/Card'
 
 import { useSelector } from 'react-redux/es/exports'
@@ -6,8 +5,6 @@ import { selectCardData } from '../feature/dustSlice'
 
 function MyPlace() {
   const data = useSelector(selectCardData)
-
-  useEffect(() => {}, [])
 
   return <div> {data && <Card guGun={data} />}</div>
 }

@@ -15,7 +15,7 @@ const initialState = {
   setSidoDatas: null,
   setGuGunList: null,
   setCardData: null,
-  myFavorite: JSON.parse(localStorage.getItem('myFavorite')),
+  myFavorite: JSON.parse(localStorage.getItem('myFavorite')) || [],
   status: 'idle',
   error: null,
 }
@@ -27,22 +27,7 @@ export const fetchDatas = createAsyncThunk(
       const { data } = await axios.get(BASE_URL, {
         params: { ...getParameters, sidoName },
       })
-
-      const response = data['response']['body']['items'].map((item) => {
-        return (item = {
-          ...item,
-          myFavorite: false,
-        })
-      })
-
-      const result = response.reduce((acc, cur) => {
-        return {
-          ...acc,
-          [cur.stationName]: cur,
-        }
-      }, {})
-      console.log(result)
-      return result
+      return data['response']['body']['items']
     } catch (error) {
       return error.message
     }
@@ -56,15 +41,15 @@ export const dustSlice = createSlice({
       state.setCardData = action.payload
     },
     addMyFavoriteList(state, action) {
-      const pastData = state.setSidoDatas[action.payload].myFavorite
       state.setSidoDatas[action.payload].myFavorite =
         !state.setSidoDatas[action.payload].myFavorite
-
-      !pastData
+      state.myFavorite.includes(action.payload)
         ? (state.myFavorite = state.myFavorite.filter(
             (item) => item !== action.payload,
           ))
         : state.myFavorite.push(action.payload)
+
+      localStorage.setItem('myFavorite', JSON.stringify(state.myFavorite))
     },
   },
   extraReducers(builder) {
@@ -73,7 +58,20 @@ export const dustSlice = createSlice({
         state.status = 'loading'
       })
       .addCase(fetchDatas.fulfilled, (state, action) => {
-        const result = action.payload
+        let prepare = action.payload
+        prepare = prepare.map((item) => {
+          const myFavorite = state.myFavorite.includes(item)
+          return (item = {
+            ...item,
+            myFavorite,
+          })
+        })
+        const result = prepare.reduce((acc, cur) => {
+          return {
+            ...acc,
+            [cur.stationName]: cur,
+          }
+        }, {})
         state.status = 'succeeded'
         state.setSidoDatas = result
         state.setGuGunList = Object.keys(result)

@@ -12,12 +12,6 @@ function Card({ guGun }) {
   const likeList = useSelector(favoriteArr)
   const data = datas[guGun]
 
-  const starData = likeList.includes(guGun) ? (
-    <FaStar size="1.5rem" />
-  ) : (
-    <FaRegStar size="1.5rem" />
-  )
-
   const grade = strGrade(data.pm10Grade)
   const addToMyFavorite = () => {
     dispatch(addMyFavoriteList(data.stationName))
@@ -33,7 +27,13 @@ function Card({ guGun }) {
               <S.SubTitle>{data.sidoName}</S.SubTitle>
             </S.CardTitle>
 
-            <S.Star onClick={addToMyFavorite}>{starData}</S.Star>
+            <S.Star onClick={addToMyFavorite}>
+              {data.myFavorite ? (
+                <FaStar size="1.5rem" />
+              ) : (
+                <FaRegStar size="1.5rem" />
+              )}
+            </S.Star>
           </S.CardHeader>
           <S.CardBody>
             <S.StrGradArea color={grade[1]}>{grade[0]}</S.StrGradArea>
