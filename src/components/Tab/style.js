@@ -12,7 +12,7 @@ export const Container = styled.div`
   z-index: 5000;
   display: flex;
   flex-wrap: wrap;
-  padding: 0.8rem 1rem;
+  padding: 0.8rem 2rem;
   cursor: pointer;
   background: #fff;
 `

@@ -39,7 +39,6 @@ export const fetchDatas = createAsyncThunk(
           [cur.stationName]: cur,
         }
       }, {})
-      console.log('실행', result)
       return result
     } catch (error) {
       return error.message

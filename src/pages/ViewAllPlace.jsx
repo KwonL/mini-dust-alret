@@ -7,9 +7,9 @@ import { getGuGunList } from '../feature/dustSlice'
 function ViewAllPlace() {
   const datas = useSelector(getGuGunList)
   return (
-    <div>
+    <>
       {datas && datas.map((item, index) => <Card key={index} guGun={item} />)}
-    </div>
+    </>
   )
 }
 
