@@ -19,11 +19,11 @@ export const OPTIONS = [
 ]
 
 export const strGrade = (data) => {
-  if (data === 1) {
+  if (data === '1') {
     return '좋음'
-  } else if (data === 2) {
+  } else if (data === '2') {
     return '보통'
-  } else if (data === 3) {
+  } else if (data === '3') {
     return '나쁨'
   } else {
     return '매우 나쁨'
