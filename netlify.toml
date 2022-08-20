@@ -1,4 +1,4 @@
 [[redirects]]
 from = '/proxy/*'
 status = 200
-to = '/index.html'
+to = 'https://apis.data.go.kr/:splat'
