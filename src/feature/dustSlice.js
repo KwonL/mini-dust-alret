@@ -60,7 +60,8 @@ export const dustSlice = createSlice({
       .addCase(fetchDatas.fulfilled, (state, action) => {
         let prepare = action.payload
         prepare = prepare.map((item) => {
-          const myFavorite = state.myFavorite.includes(item)
+          const myFavorite = state.myFavorite.includes(item.stationName)
+
           return (item = {
             ...item,
             myFavorite,
