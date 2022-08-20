@@ -1,4 +1,4 @@
 [[redirects]]
-from = '/*'
+from = '/proxy/*'
 status = 200
 to = '/index.html'
