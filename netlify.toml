@@ -1,4 +1,5 @@
 [[redirects]]
-from = '/proxy/*'
-status = 200
-to = 'https://apis.data.go.kr/:splat'
+  from = "/api/*"
+  to = "https://openapi.naver.com/:splat"
+  status = 200
+  force = true
