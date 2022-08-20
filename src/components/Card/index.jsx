@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import * as S from './style'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSidoDatas, favoriteArr } from '../../feature/dustSlice'
