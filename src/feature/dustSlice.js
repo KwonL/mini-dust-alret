@@ -16,13 +16,14 @@ const initialState = {
   setGuGunList: null,
   setCardData: null,
   myFavorite: JSON.parse(localStorage.getItem('myFavorite')) || [],
+  sidoName: '서울',
   status: 'idle',
   error: null,
 }
 
 export const fetchDatas = createAsyncThunk(
   'dust/fetchDatas',
-  async (sidoName) => {
+  async (sidoName = '서울') => {
     try {
       const { data } = await axios.get(BASE_URL, {
         params: { ...getParameters, sidoName },
@@ -37,6 +38,9 @@ export const dustSlice = createSlice({
   name: 'dust',
   initialState,
   reducers: {
+    chnageSido(state, action) {
+      state.sidoName = action.payload
+    },
     filterGuGunDatas(state, action) {
       state.setCardData = action.payload
     },
@@ -89,9 +93,14 @@ export const getSidoDatas = (state) => state.dust.setSidoDatas
 export const getGuGunList = (state) => state.dust.setGuGunList
 export const selectCardData = (state) => state.dust.setCardData
 export const favoriteArr = (state) => state.dust.myFavorite
+export const sidoName = (state) => state.dust.sidoName
 export const getDustDataStatus = (state) => state.dust.status
 export const getDustDataError = (state) => state.dust.error
 
-export const { filterGuGunDatas, filterGuGunList, addMyFavoriteList } =
-  dustSlice.actions
+export const {
+  filterGuGunDatas,
+  filterGuGunList,
+  addMyFavoriteList,
+  chnageSido,
+} = dustSlice.actions
 export default dustSlice.reducer

@@ -1,8 +1,8 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import Header from './components/Header'
 import SelectBox from './components/SelectBox'
+import FetchData from './components/FetchData'
 import Tab from './components/Tab'
-import Favorite from './pages/Favorites'
+import Favorites from './pages/Favorites'
 import MyPlace from './pages/MyPlace'
 import ViewAllPlace from './pages/ViewAllPlace'
 import Container from 'react-bootstrap/Container'
@@ -13,12 +13,12 @@ function App() {
 
   return (
     <Container>
-      <Header />
+      <FetchData />
       <SelectBox />
       <Routes>
         <Route default path="/" element={<MyPlace />} />
         <Route path="/viewall" element={<ViewAllPlace />} />
-        <Route path="/favorite" element={<Favorite />} />
+        <Route path="/favorite" element={<Favorites />} />
         <Route path="/*" element={<p>Not Found</p>} />
       </Routes>
       <Tab isActive={location} />

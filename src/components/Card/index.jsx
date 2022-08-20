@@ -8,10 +8,9 @@ import { strGrade } from '../../utils/constants'
 function Card({ guGun }) {
   const dispatch = useDispatch()
   const datas = useSelector(getSidoDatas)
-  const likeList = useSelector(favoriteArr)
   const data = datas[guGun]
 
-  const grade = strGrade(data.pm10Grade)
+  const grade = strGrade(data?.pm10Grade)
   const addToMyFavorite = () => {
     dispatch(addMyFavoriteList(data.stationName))
   }

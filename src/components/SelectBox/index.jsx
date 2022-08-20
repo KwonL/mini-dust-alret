@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react'
 import * as S from './style'
 import { OPTIONS } from '../../utils/constants'
 import {
@@ -7,12 +6,13 @@ import {
   getDustDataError,
   fetchDatas,
   filterGuGunDatas,
+  chnageSido,
+  sidoName,
 } from '../../feature/dustSlice'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
 import { useLocation } from 'react-router'
 
 function SelectBox() {
-  const [sido, setSido] = useState(OPTIONS[0])
   const dispatch = useDispatch()
   const isStatus = useSelector(getDustDataStatus)
   const isError = useSelector(getDustDataError)
@@ -21,13 +21,15 @@ function SelectBox() {
   const location = useLocation().pathname
 
   const changeSidoHandler = async (e) => {
-    setSido(e.target.value)
+    dispatch(chnageSido(e.target.value))
+    console.log('실행?')
     dispatch(fetchDatas(e.target.value))
   }
 
   const changeGuGunHandler = (e) => {
     dispatch(filterGuGunDatas(e.target.value))
   }
+
   return (
     <S.Container>
       {location !== '/favorite' && (

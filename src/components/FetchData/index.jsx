@@ -5,19 +5,26 @@ import {
   getDustDataError,
   fetchDatas,
 } from '../../feature/dustSlice'
+import * as S from './style'
+import Spinner from 'react-bootstrap/Spinner'
 
-function dustContainer() {
+function FetchData() {
   const dispatch = useDispatch()
   const isStatus = useSelector(getDustDataStatus)
-  const isError = useSelector(getDustDataError)
+  const Error = useSelector(getDustDataError)
 
   useEffect(() => {
     if (isStatus === 'idle') {
-      dispatch(fetchDatas('서울'))
+      dispatch(fetchDatas())
     }
   }, [isStatus, dispatch])
 
-  return <div>미세먼지알림이</div>
+  return (
+    <S.Container>
+      {isStatus === 'loading' && <Spinner animation="border" />}
+      {isStatus === 'failed' && <p>{Error}</p>}
+    </S.Container>
+  )
 }
 
-export default dustContainer
+export default FetchData
