@@ -28,13 +28,6 @@ function SelectBox() {
   const changeGuGunHandler = (e) => {
     dispatch(filterGuGunDatas(e.target.value))
   }
-
-  useEffect(() => {
-    if (isStatus === 'idle') {
-      dispatch(fetchDatas(sido))
-    }
-  }, [isStatus, dispatch, sido])
-
   return (
     <S.Container>
       {location !== '/favorite' && (

@@ -1,4 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
+import Header from './components/Header'
 import SelectBox from './components/SelectBox'
 import Tab from './components/Tab'
 import Favorite from './pages/Favorites'
@@ -12,6 +13,7 @@ function App() {
 
   return (
     <Container>
+      <Header />
       <SelectBox />
       <Routes>
         <Route default path="/" element={<MyPlace />} />
