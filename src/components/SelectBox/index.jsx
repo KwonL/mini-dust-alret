@@ -8,6 +8,7 @@ import {
   filterGuGunDatas,
   chnageSido,
   sidoName,
+  selectCardData,
 } from '../../feature/dustSlice'
 import { useSelector, useDispatch } from 'react-redux/es/exports'
 import { useLocation } from 'react-router'
@@ -17,6 +18,7 @@ function SelectBox() {
   const isStatus = useSelector(getDustDataStatus)
   const isError = useSelector(getDustDataError)
   const guGunList = useSelector(getGuGunList)
+  const defaultData = useSelector(selectCardData)
 
   const location = useLocation().pathname
 
@@ -43,7 +45,11 @@ function SelectBox() {
       )}
 
       {location == '/' && (
-        <S.SelectBox onChange={changeGuGunHandler} width="217">
+        <S.SelectBox
+          onChange={changeGuGunHandler}
+          width="217"
+          defaultValue={defaultData}
+        >
           {guGunList &&
             guGunList.map((gugun, index) => (
               <option key={index} value={gugun}>
